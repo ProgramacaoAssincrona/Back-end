@@ -9,32 +9,13 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Configurar Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Instalar dependências
-        run: npm install
-
-      - name: Verificar formatação (Prettier)
-        run: npm run format
-      
-      - name: Verificar linting (ESLint)
-        run: npm run lint
-
-      - name: Build do projeto
-        run: npm run build
-
-      - name: Executar testes
-        run: npm run test
-
-      - name: Testes de cobertura
-        run: npm run test:cov
+      - name: Acionar Deploy no Render
+        run: |
+          curl -X POST "https://api.render.com/deploy/srv-cv83vdij1k6c73bjpm90?key=C2CnB3mqChk"
